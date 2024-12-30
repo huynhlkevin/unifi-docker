@@ -1,0 +1,25 @@
+name: Unifi Network Server
+
+services:
+  mongodb:
+    healthcheck:
+      test: ["CMD-SHELL", "${MONGODB_SHELL:-mongosh} --quiet --eval \"db.runCommand('ping').ok\""]
+      start_period: 10s
+      start_interval: 2s
+    image: ${MONGODB_IMAGE:-mongo:7.0.16}
+    restart: always
+  unifi:
+    depends_on:
+      mongodb:
+        condition: service_healthy
+        restart: true
+    image: huynhlkevin/unifi:v0.1.0
+    ports:
+      - "3478:3478"
+      - "8080:8080"
+      - "8443:8443"
+      - "8880:8880"
+      - "8843:8843"
+      - "6789:6789"
+      - "10001:10001"
+    restart: always
