@@ -1,6 +1,8 @@
 #!/bin/sh
 cd /usr/lib/unifi/
 
+sed -i s/\$MONGODB_ADDRESS/$MONGODB_ADDRESS/ ./data/system.properties
+
 UNIFI_CORE_ENABLED=false
 UNIFI_MONGODB_SERVICE_ENABLED=false
 UNIFI_JVM_OPTS='-Xmx1024M -XX:+UseParallelGC'
