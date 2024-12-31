@@ -8,12 +8,14 @@ services:
       start_interval: 2s
     image: ${MONGODB_IMAGE:-mongo:7.0.16}
     restart: always
-  unifi:
+  unifi_development:
+    build: .
     depends_on:
       mongodb:
         condition: service_healthy
         restart: true
-    image: huynhlkevin/unifi:v0.1.0
+    environment:
+      - MONGODB_ADDRESS=mongodb
     ports:
       - "3478:3478"
       - "8080:8080"
@@ -22,4 +24,25 @@ services:
       - "8843:8843"
       - "6789:6789"
       - "10001:10001"
+    profiles:
+      - development
+    restart: always
+  unifi_production:
+    depends_on:
+      mongodb:
+        condition: service_healthy
+        restart: true
+    image: huynhlkevin/unifi:v0.1.0
+    environment:
+      - MONGODB_ADDRESS=mongodb
+    ports:
+      - "3478:3478"
+      - "8080:8080"
+      - "8443:8443"
+      - "8880:8880"
+      - "8843:8843"
+      - "6789:6789"
+      - "10001:10001"
+    profiles:
+      - production
     restart: always
