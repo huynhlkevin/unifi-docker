@@ -1,0 +1,30 @@
+name: Check Version Tag
+
+on:
+  pull_request:
+
+jobs:
+  check_version_tag:
+    environment: development
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          sparse-checkout: Dockerfile
+          sparse-checkout-cone-mode: false
+
+      - name: Get version
+        run: echo "DOCKERFILE_VERSION=$(sed -rn 's/LABEL version="([0-9]+\.[0-9]+\.[0-9]+)"/\1/p' Dockerfile)" >> "$GITHUB_ENV"
+
+      - name: Check if tag exists
+        run: |
+          EXISTS=$(gh release list --json tagName --jq 'map(.[]) | any(. == "v${{ env.DOCKERFILE_VERSION }}")')
+          if [[ $EXISTS == true ]] then
+            echo "tag for this version already exists"
+            exit 1
+          else
+            exit 0
+          fi
+        env:
+          GH_TOKEN: ${{ github.token }}
