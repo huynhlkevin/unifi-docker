@@ -32,7 +32,7 @@ services:
       mongodb:
         condition: service_healthy
         restart: true
-    image: huynhlkevin/unifi:v0.1.0
+    image: huynhlkevin/unifi:v0.2.0
     environment:
       - MONGODB_ADDRESS=mongodb
     ports:
