@@ -27,6 +27,8 @@ services:
     profiles:
       - development
     restart: always
+    volumes:
+      - unifi-data:/usr/lib/unifi/data
   unifi-production:
     depends_on:
       mongodb:
@@ -46,3 +48,8 @@ services:
     profiles:
       - production
     restart: always
+    volumes:
+      - unifi-data:/usr/lib/unifi/data
+
+volumes:
+  unifi-data:
