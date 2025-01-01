@@ -8,7 +8,7 @@ services:
       start_interval: 2s
     image: ${MONGODB_IMAGE:-mongo:7.0.16}
     restart: always
-  unifi_development:
+  unifi-development:
     build: .
     depends_on:
       mongodb:
@@ -27,7 +27,9 @@ services:
     profiles:
       - development
     restart: always
-  unifi_production:
+    volumes:
+      - unifi-data:/usr/lib/unifi/data
+  unifi-production:
     depends_on:
       mongodb:
         condition: service_healthy
@@ -46,3 +48,8 @@ services:
     profiles:
       - production
     restart: always
+    volumes:
+      - unifi-data:/usr/lib/unifi/data
+
+volumes:
+  unifi-data:

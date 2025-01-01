@@ -1,6 +1,6 @@
 FROM ubuntu:22.04 AS base
 
-LABEL version="0.2.0"
+LABEL version="0.3.0"
 
 ENV UNIFI=https://dl.ui.com/unifi/8.6.9/unifi_sysvinit_all.deb
 ENV UNIFI_SHA256=d34e19244a23db71721440739eaae93f343d13a0d8a43ee00716b77b04ae9c8a
@@ -12,6 +12,7 @@ RUN \
   echo "deb [ arch=amd64,arm64 signed-by=/usr/share/keyrings/mongodb-server-7.0.gpg ] https://repo.mongodb.org/apt/ubuntu jammy/mongodb-org/7.0 multiverse" | tee /etc/apt/sources.list.d/mongodb-org-7.0.list
 
 FROM mongodb AS unifi
+VOLUME [ "/usr/lib/unifi/data" ]
 ADD --checksum=sha256:${UNIFI_SHA256} ${UNIFI} /tmp/unifi.deb
 RUN apt-get update && apt-get install -y /tmp/unifi.deb
 COPY ./system.properties /usr/lib/unifi/data
