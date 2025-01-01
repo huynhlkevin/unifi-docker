@@ -1,6 +1,6 @@
 FROM ubuntu:22.04 AS base
 
-LABEL version="0.2.0"
+LABEL version="0.3.0"
 
 ENV UNIFI=https://dl.ui.com/unifi/8.6.9/unifi_sysvinit_all.deb
 ENV UNIFI_SHA256=d34e19244a23db71721440739eaae93f343d13a0d8a43ee00716b77b04ae9c8a
