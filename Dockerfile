@@ -12,6 +12,7 @@ RUN \
   echo "deb [ arch=amd64,arm64 signed-by=/usr/share/keyrings/mongodb-server-7.0.gpg ] https://repo.mongodb.org/apt/ubuntu jammy/mongodb-org/7.0 multiverse" | tee /etc/apt/sources.list.d/mongodb-org-7.0.list
 
 FROM mongodb AS unifi
+VOLUME [ "/usr/lib/unifi/data" ]
 ADD --checksum=sha256:${UNIFI_SHA256} ${UNIFI} /tmp/unifi.deb
 RUN apt-get update && apt-get install -y /tmp/unifi.deb
 COPY ./system.properties /usr/lib/unifi/data
