@@ -41,4 +41,5 @@ EXPOSE 10001/udp
 
 HEALTHCHECK --start-period=1m CMD [ "/bin/bash", "-c", "curl --head --silent --fail localhost:8080 || exit 1" ]
 
+USER unifi
 CMD [ "unifi" ]
