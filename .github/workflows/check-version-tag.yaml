@@ -4,7 +4,7 @@ on:
   pull_request:
 
 jobs:
-  check_version_tag:
+  check-version-tag:
     environment: development
     runs-on: ubuntu-latest
     steps:

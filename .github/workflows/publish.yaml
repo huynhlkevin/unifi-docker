@@ -137,7 +137,7 @@ jobs:
           docker buildx imagetools inspect ${{ env.DOCKERHUB_REPO }}:${{ steps.meta.outputs.version }}
           docker buildx imagetools inspect ${{ env.GHCR_REPO }}:${{ steps.meta.outputs.version }}
 
-  create_release:
+  create-release:
     needs: [merge]
     permissions:
       contents: write
