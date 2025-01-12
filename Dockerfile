@@ -2,8 +2,8 @@ FROM ubuntu:22.04 AS base
 
 LABEL version="0.3.1"
 
-ENV UNIFI=https://dl.ui.com/unifi/8.6.9/unifi_sysvinit_all.deb
-ENV UNIFI_SHA256=d34e19244a23db71721440739eaae93f343d13a0d8a43ee00716b77b04ae9c8a
+ARG UNIFI=https://dl.ui.com/unifi/9.0.108/unifi_sysvinit_all.deb
+ARG UNIFI_SHA256=a7eb785bc991f82b6649766ac693f5539e621e12b3eec5dc2f73eefb4a5e36b5
 
 FROM base AS mongodb
 RUN \
