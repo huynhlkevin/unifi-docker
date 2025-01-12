@@ -34,7 +34,7 @@ services:
       mongodb:
         condition: service_healthy
         restart: true
-    image: huynhlkevin/unifi:v0.2.0
+    image: huynhlkevin/unifi:v0.3.2
     environment:
       - MONGODB_ADDRESS=mongodb
     ports:
