@@ -1,6 +1,6 @@
 FROM ubuntu:22.04 AS base
 
-LABEL version="0.3.1"
+LABEL version="0.3.2"
 
 ARG UNIFI=https://dl.ui.com/unifi/9.0.108/unifi_sysvinit_all.deb
 ARG UNIFI_SHA256=a7eb785bc991f82b6649766ac693f5539e621e12b3eec5dc2f73eefb4a5e36b5
